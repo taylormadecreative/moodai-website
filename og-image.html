@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            width: 1200px;
+            height: 630px;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .gradient-bg {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(224, 122, 61, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 50%, rgba(45, 127, 184, 0.15) 0%, transparent 50%);
+        }
+        .content {
+            text-align: center;
+            z-index: 1;
+        }
+        .tagline-top {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-style: italic;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #f5f0e8;
+            margin-bottom: 20px;
+        }
+        .title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 180px;
+            letter-spacing: 0.05em;
+            color: #fafafa;
+            line-height: 0.85;
+            text-shadow: 0 0 100px rgba(201, 169, 98, 0.3);
+        }
+        .gradient-line {
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, #e07a3d, #9a6b8c, #2d7fb8);
+            margin: 40px auto;
+        }
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-style: italic;
+            letter-spacing: 0.15em;
+            background: linear-gradient(90deg, #e07a3d, #9a6b8c, #2d7fb8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .corner-tl, .corner-br {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid;
+            border-image: linear-gradient(90deg, #e07a3d, #9a6b8c, #2d7fb8) 1;
+        }
+        .corner-tl {
+            top: 40px;
+            left: 40px;
+            border-right: none;
+            border-bottom: none;
+        }
+        .corner-br {
+            bottom: 40px;
+            right: 40px;
+            border-left: none;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    <div class="corner-tl"></div>
+    <div class="corner-br"></div>
+    <div class="content">
+        <p class="tagline-top">AI Visuals for Beauty & Fashion</p>
+        <h1 class="title">MOOD AI</h1>
+        <div class="gradient-line"></div>
+        <p class="tagline">Forget the rules. Follow the MOOD.</p>
+    </div>
+</body>
+</html>

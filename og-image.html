@@ -16,10 +16,9 @@
             height: 630px;
             background: #0a0a0a;
             display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
             overflow: hidden;
+            font-family: 'Syne', sans-serif;
         }
         .gradient-bg {
             position: absolute;
@@ -27,53 +26,25 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(ellipse at 25% 50%, rgba(224, 122, 61, 0.12) 0%, transparent 50%),
-                        radial-gradient(ellipse at 75% 50%, rgba(45, 127, 184, 0.12) 0%, transparent 50%),
-                        radial-gradient(ellipse at 50% 80%, rgba(154, 107, 140, 0.08) 0%, transparent 40%);
+            background: radial-gradient(ellipse at 20% 30%, rgba(224, 122, 61, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 70%, rgba(45, 127, 184, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 100%, rgba(154, 107, 140, 0.1) 0%, transparent 40%);
         }
-        .content {
-            text-align: center;
-            z-index: 1;
+        .left {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: center;
+            padding: 56px 0 56px 64px;
+            z-index: 1;
         }
-        .tagline-top {
-            font-family: 'Syne', sans-serif;
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-            color: #f5f0e8;
-            margin-bottom: 24px;
-            opacity: 0.8;
-        }
-        .title {
-            font-family: 'Syne', sans-serif;
-            font-size: 140px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: #fafafa;
-            line-height: 0.9;
-        }
-        .title-sub {
-            font-family: 'Syne', sans-serif;
-            font-size: 140px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: #fafafa;
-            line-height: 0.9;
-            margin-bottom: 8px;
-        }
-        .gradient-line {
-            width: 160px;
-            height: 4px;
-            background: linear-gradient(90deg, #e07a3d, #9a6b8c, #2d7fb8);
-            margin: 32px 0;
+        .logo-img {
+            width: 420px;
+            height: auto;
+            margin-bottom: 20px;
         }
         .tagline {
-            font-family: 'Syne', sans-serif;
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 500;
             letter-spacing: 0.4em;
             text-transform: uppercase;
@@ -81,38 +52,100 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 36px;
         }
-        .services {
+        .cta-row {
             display: flex;
-            gap: 32px;
-            margin-top: 28px;
+            align-items: center;
+            gap: 16px;
+            margin-top: auto;
         }
-        .service-pill {
+        .cta-btn {
+            font-family: 'Syne', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #0a0a0a;
+            background: linear-gradient(90deg, #e07a3d, #9a6b8c, #2d7fb8);
+            padding: 10px 24px;
+            border-radius: 2px;
+        }
+        .cta-url {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            color: rgba(250,250,250,0.35);
+        }
+        .right {
+            width: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 56px 64px 56px 40px;
+            z-index: 1;
+        }
+        .services-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: rgba(245, 240, 232, 0.4);
+            margin-bottom: 24px;
+        }
+        .service-item {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .service-item:first-of-type {
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .service-num {
             font-family: 'Cormorant Garamond', serif;
             font-size: 13px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: rgba(250, 250, 250, 0.4);
-            padding: 6px 16px;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
+            color: rgba(250,250,250,0.25);
+            min-width: 24px;
+        }
+        .service-name {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: #fafafa;
+        }
+        .service-brief {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            color: rgba(250,250,250,0.35);
+            margin-top: 3px;
+        }
+        .divider {
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            bottom: 15%;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(224, 122, 61, 0.3), rgba(154, 107, 140, 0.3), rgba(45, 127, 184, 0.3), transparent);
         }
         .corner-tl, .corner-br {
             position: absolute;
-            width: 60px;
-            height: 60px;
+            width: 48px;
+            height: 48px;
         }
         .corner-tl {
-            top: 32px;
-            left: 32px;
-            border-left: 2px solid rgba(224, 122, 61, 0.4);
-            border-top: 2px solid rgba(224, 122, 61, 0.4);
+            top: 28px;
+            left: 28px;
+            border-left: 2px solid rgba(224, 122, 61, 0.3);
+            border-top: 2px solid rgba(224, 122, 61, 0.3);
         }
         .corner-br {
-            bottom: 32px;
-            right: 32px;
-            border-right: 2px solid rgba(45, 127, 184, 0.4);
-            border-bottom: 2px solid rgba(45, 127, 184, 0.4);
+            bottom: 28px;
+            right: 28px;
+            border-right: 2px solid rgba(45, 127, 184, 0.3);
+            border-bottom: 2px solid rgba(45, 127, 184, 0.3);
         }
     </style>
 </head>
@@ -120,17 +153,46 @@
     <div class="gradient-bg"></div>
     <div class="corner-tl"></div>
     <div class="corner-br"></div>
-    <div class="content">
-        <p class="tagline-top">AI Visuals for Beauty & Fashion</p>
-        <h1 class="title">MOOD</h1>
-        <h1 class="title-sub">STUDIOS AI</h1>
-        <div class="gradient-line"></div>
+    <div class="divider"></div>
+
+    <div class="left">
+        <img src="mood logo/MOOD-STUDIOS-AI-LOGO.png" alt="MOOD STUDIOS AI" class="logo-img">
         <p class="tagline">Forget the rules. Follow the MOOD.</p>
-        <div class="services">
-            <span class="service-pill">Campaign Visuals</span>
-            <span class="service-pill">Creative Direction</span>
-            <span class="service-pill">AI Models</span>
-            <span class="service-pill">Motion</span>
+        <div class="cta-row">
+            <span class="cta-btn">View Our Work</span>
+            <span class="cta-url">moodstudios.ai</span>
+        </div>
+    </div>
+
+    <div class="right">
+        <p class="services-label">What We Do</p>
+        <div class="service-item">
+            <span class="service-num">01</span>
+            <div>
+                <div class="service-name">Campaign Visuals</div>
+                <div class="service-brief">Still + Motion</div>
+            </div>
+        </div>
+        <div class="service-item">
+            <span class="service-num">02</span>
+            <div>
+                <div class="service-name">Creative Direction</div>
+                <div class="service-brief">Concept to Execution</div>
+            </div>
+        </div>
+        <div class="service-item">
+            <span class="service-num">03</span>
+            <div>
+                <div class="service-name">AI Virtual Models</div>
+                <div class="service-brief">Custom Digital Talent</div>
+            </div>
+        </div>
+        <div class="service-item">
+            <span class="service-num">04</span>
+            <div>
+                <div class="service-name">Motion & Short-Form</div>
+                <div class="service-brief">Social-Ready Video</div>
+            </div>
         </div>
     </div>
 </body>

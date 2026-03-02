@@ -60,10 +60,10 @@
     <link rel="icon" type="image/png" href="favicon/moodai favicon.png">
     <link rel="apple-touch-icon" href="favicon/moodai favicon.png">
 
-    <!-- Fonts: Syne (modern geometric) + Cormorant Garamond (elegant body) + Playfair Display (italic accents) -->
+    <!-- Fonts: Plus Jakarta Sans (unified modern sans-serif) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -77,9 +77,9 @@
             --gradient-mauve: #9a6b8c;
             --gradient-blue: #2d7fb8;
             --brand-gradient: linear-gradient(90deg, var(--gradient-orange), var(--gradient-mauve), var(--gradient-blue));
-            --font-display: 'Syne', sans-serif;
-            --font-elegant: 'Playfair Display', serif;
-            --font-body: 'Cormorant Garamond', serif;
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --font-elegant: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
         }
 
         * {
@@ -151,6 +151,17 @@
             opacity: 0;
             animation: preloaderFade 0.8s ease forwards, glowPulse 2s ease-in-out infinite;
             filter: drop-shadow(0 0 30px rgba(224, 122, 61, 0.4));
+        }
+
+        .preloader-percent {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: rgba(250, 250, 250, 0.6);
+            margin-top: 1.5rem;
+            opacity: 0;
+            animation: preloaderFade 0.5s ease forwards 0.3s;
         }
 
         .preloader-line {
@@ -378,22 +389,6 @@
             100% { background-position: 100% 50%; }
         }
 
-        .hero-line {
-            width: 120px;
-            height: 4px;
-            background: var(--brand-gradient);
-            margin: 0.5rem auto 0;
-            opacity: 0;
-            transform: scaleX(0);
-            animation: lineReveal 0.8s ease forwards 3.2s;
-        }
-
-        @keyframes lineReveal {
-            to {
-                opacity: 1;
-                transform: scaleX(1);
-            }
-        }
 
         .scroll-indicator {
             position: absolute;
@@ -1145,6 +1140,13 @@
             gap: 1.25rem;
         }
 
+        .form-group label[for="firstName"]::after,
+        .form-group label[for="lastName"]::after,
+        .form-group label[for="email"]::after {
+            content: ' *';
+            color: var(--gradient-orange);
+        }
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1496,6 +1498,7 @@
     <!-- Preloader -->
     <div class="preloader" aria-label="Loading">
         <img src="mood logo/MOOD-STUDIOS-AI-LOGO.png" alt="Mood Studios AI" class="preloader-logo">
+        <div class="preloader-percent">0%</div>
         <div class="preloader-line"></div>
     </div>
 
@@ -1527,7 +1530,6 @@
                 <img src="mood logo/MOOD-STUDIOS-AI-LOGO.png" alt="MOOD STUDIOS AI">
             </h1>
             <p class="hero-subtitle">Forget the rules. Follow the MOOD.</p>
-            <div class="hero-line"></div>
         </div>
     </header>
 
@@ -1904,6 +1906,16 @@
 
         // Preloader
         window.addEventListener('load', () => {
+            const percentEl = document.querySelector('.preloader-percent');
+            let current = 0;
+            const duration = 1800;
+            const interval = 30;
+            const step = 100 / (duration / interval);
+            const counter = setInterval(() => {
+                current = Math.min(current + step, 100);
+                percentEl.textContent = Math.round(current) + '%';
+                if (current >= 100) clearInterval(counter);
+            }, interval);
             setTimeout(() => {
                 document.querySelector('.preloader').classList.add('hide');
                 setTimeout(() => {
@@ -2079,7 +2091,12 @@
         // Form submission
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const btn = e.target.querySelector('.submit-btn');
+            const form = e.target;
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            const btn = form.querySelector('.submit-btn');
             btn.textContent = 'MESSAGE SENT';
             btn.style.background = 'linear-gradient(90deg, #e07a3d, #9a6b8c, #2d7fb8)';
             btn.style.color = 'var(--white)';
@@ -2087,7 +2104,7 @@
                 btn.textContent = 'SEND MESSAGE';
                 btn.style.background = '';
                 btn.style.color = '';
-                e.target.reset();
+                form.reset();
             }, 3000);
         });
 

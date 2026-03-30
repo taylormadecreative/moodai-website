@@ -50,7 +50,7 @@
             "addressRegion": "TX",
             "addressCountry": "US"
         },
-        "email": "hello@moodai.com",
+        "email": "info@moodstudiosai.com",
         "sameAs": [],
         "knowsAbout": ["AI Generated Images", "Fashion Photography", "Beauty Campaigns", "Luxury Brand Visuals"]
     }
@@ -1004,38 +1004,45 @@
         .marquee-section {
             padding: 0;
             overflow: hidden;
-            background: var(--brand-gradient);
+            background: transparent;
             position: relative;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
         .marquee {
             display: flex;
-            animation: marquee 25s linear infinite;
-            padding: 2rem 0;
+            animation: marquee 35s linear infinite;
+            padding: 1rem 0;
         }
 
         .marquee-content {
             display: flex;
             align-items: center;
-            gap: 4rem;
-            padding-right: 4rem;
+            gap: 3rem;
+            padding-right: 3rem;
             white-space: nowrap;
         }
 
         .marquee-text {
             font-family: var(--font-display);
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            color: var(--white);
+            font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+            font-weight: 400;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            transition: color 0.4s ease;
+        }
+
+        .marquee-section:hover .marquee-text {
+            color: rgba(255,255,255,0.55);
         }
 
         .marquee-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--white);
+            width: 3px;
+            height: 3px;
+            background: rgba(255,255,255,0.2);
             border-radius: 50%;
-            opacity: 0.8;
             flex-shrink: 0;
         }
 
@@ -1749,7 +1756,7 @@
                 <h2 id="contact-heading">LET'S<br>CREATE</h2>
                 <p class="contact-tagline">Ready to set the mood?</p>
                 <address class="contact-details">
-                    <p><a href="mailto:hello@moodai.com">hello@moodai.com</a></p>
+                    <p><a href="mailto:info@moodstudiosai.com">info@moodstudiosai.com</a></p>
                     <p>Dallas, TX</p>
                 </address>
                 <div class="social-links">
@@ -1765,7 +1772,8 @@
                     </a>
                 </div>
             </div>
-            <form class="contact-form" id="contactForm" action="#" method="POST" aria-label="Contact form">
+            <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" aria-label="Contact form">
+                <input type="hidden" name="form-name" value="contact">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
@@ -2088,7 +2096,7 @@
             }
         });
 
-        // Form submission
+        // Form submission via Netlify Forms
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const form = e.target;
@@ -2097,15 +2105,35 @@
                 return;
             }
             const btn = form.querySelector('.submit-btn');
-            btn.textContent = 'MESSAGE SENT';
-            btn.style.background = 'linear-gradient(90deg, #e07a3d, #9a6b8c, #2d7fb8)';
-            btn.style.color = 'var(--white)';
-            setTimeout(() => {
-                btn.textContent = 'SEND MESSAGE';
-                btn.style.background = '';
-                btn.style.color = '';
-                form.reset();
-            }, 3000);
+            btn.textContent = 'SENDING...';
+            btn.disabled = true;
+
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            })
+            .then(res => {
+                if (res.ok) {
+                    btn.textContent = 'MESSAGE SENT';
+                    btn.style.background = 'linear-gradient(90deg, #e07a3d, #9a6b8c, #2d7fb8)';
+                    btn.style.color = 'var(--white)';
+                    setTimeout(() => {
+                        btn.textContent = 'SEND MESSAGE';
+                        btn.style.background = '';
+                        btn.style.color = '';
+                        btn.disabled = false;
+                        form.reset();
+                    }, 3000);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(() => {
+                btn.textContent = 'ERROR — TRY AGAIN';
+                btn.disabled = false;
+                setTimeout(() => { btn.textContent = 'SEND MESSAGE'; }, 3000);
+            });
         });
 
         // Smooth scroll for navigation

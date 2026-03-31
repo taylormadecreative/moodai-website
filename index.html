@@ -1772,9 +1772,11 @@
                     </a>
                 </div>
             </div>
-            <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="Contact form">
-                <input type="hidden" name="form-name" value="contact">
-                <p class="hidden" style="display:none"><input name="bot-field"></p>
+            <form class="contact-form" id="contactForm" method="POST" aria-label="Contact form">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Inquiry — moodstudiosai.com">
+                <input type="hidden" name="_template" value="table">
+                <input type="text" name="_honey" style="display:none">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
@@ -1798,7 +1800,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="website">Website</label>
-                        <input type="url" id="website" name="website" placeholder="https://yoursite.com" autocomplete="url">
+                        <input type="text" id="website" name="website" placeholder="yoursite.com" autocomplete="url">
                     </div>
                     <div class="form-group">
                         <label for="socialMedia">Social Media</label>
@@ -2097,7 +2099,7 @@
             }
         });
 
-        // Form submission via Netlify Forms
+        // Form submission via FormSubmit
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const form = e.target;
@@ -2109,10 +2111,10 @@
             btn.textContent = 'SENDING...';
             btn.disabled = true;
 
-            fetch('/', {
+            fetch('https://formsubmit.co/ajax/moodstudios@gmail.com', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(new FormData(form)).toString()
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(new FormData(form)))
             })
             .then(res => {
                 if (res.ok) {
